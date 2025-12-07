@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马克思主义 - 科学的世界观和方法论</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "SimHei", sans-serif;
+        }
+
+        /* 滚动平滑效果 */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: #333;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(20, 68, 123, 0.95);
+            z-index: 999;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 60px;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 30px;
+        }
+
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #f0a830;
+        }
+
+        /* 移动端菜单按钮 */
+        .menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Banner 区域 */
+        .banner {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1932&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .banner-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .banner-subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            line-height: 1.8;
+        }
+
+        /* 通用内容容器 */
+        .container {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        /* 板块标题样式 */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #14447b;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: #e63946;
+            margin: 15px auto;
+        }
+
+        /* 简介板块 */
+        .intro {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .intro-img {
+            flex: 1 1 400px;
+        }
+
+        .intro-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-content {
+            flex: 1 1 600px;
+        }
+
+        .intro-content h3 {
+            font-size: 1.5rem;
+            color: #14447b;
+            margin-bottom: 20px;
+        }
+
+        .intro-content p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* 核心思想板块 */
+        .core-ideas {
+            background-color: #fff;
+            padding: 80px 0;
+        }
+
+        .ideas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .idea-card {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .idea-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .idea-card h4 {
+            font-size: 1.3rem;
+            color: #14447b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .idea-card h4 i {
+            color: #e63946;
+            margin-right: 10px;
+        }
+
+        /* 发展历程时间轴 */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #14447b;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border: 4px solid #e63946;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .left::after {
+            right: -13px;
+        }
+
+        .right::after {
+            left: -13px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content h4 {
+            color: #14447b;
+            margin-bottom: 10px;
+        }
+
+        /* 重要著作板块 */
+        .works {
+            background-color: #fff;
+            padding: 80px 0;
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .work-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .work-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .work-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .work-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .work-card:hover .work-img img {
+            transform: scale(1.1);
+        }
+
+        .work-content {
+            padding: 20px;
+        }
+
+        .work-content h4 {
+            color: #14447b;
+            margin-bottom: 10px;
+        }
+
+        .work-content p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* 回到顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #14447b;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #e63946;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #14447b;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content p {
+            margin-bottom: 10px;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .banner-title {
+                font-size: 2.5rem;
+            }
+
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 18px;
+            }
+
+            .left::after, .right::after {
+                left: 18px;
+            }
+
+            .right {
+                left: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                flex-direction: column;
+                background-color: #14447b;
+                width: 100%;
+                height: calc(100vh - 60px);
+                transition: left 0.3s ease;
+                padding: 20px 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 0;
+                padding: 15px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .banner-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .intro {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .banner-title {
+                font-size: 1.8rem;
+            }
+
+            .banner-subtitle {
+                font-size: 1rem;
+            }
+
+            .container {
+                margin: 60px auto;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <!-- 引入图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="#home" class="logo">马克思主义</a>
+            <div class="menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#home" class="nav-link">首页</a></li>
+                <li class="nav-item"><a href="#intro" class="nav-link">马克思主义简介</a></li>
+                <li class="nav-item"><a href="#core" class="nav-link">核心思想</a></li>
+                <li class="nav-item"><a href="#timeline" class="nav-link">发展历程</a></li>
+                <li class="nav-item"><a href="#works" class="nav-link">重要著作</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Banner 区域 -->
+    <section class="banner" id="home">
+        <h1 class="banner-title">马克思主义：科学的世界观和方法论</h1>
+        <p class="banner-subtitle">
+            马克思主义是关于全世界无产阶级和全人类彻底解放的学说，它由马克思主义哲学、马克思主义政治经济学和科学社会主义三大部分组成，
+            是马克思、恩格斯在批判地继承和吸收人类关于自然科学、思维科学、社会科学优秀成果的基础上于19世纪40年代创立的，并在实践中不断地丰富、发展和完善的无产阶级思想的科学体系。
+        </p>
+    </section>
+
+    <!-- 马克思主义简介 -->
+    <section class="container" id="intro">
+        <h2 class="section-title">马克思主义简介</h2>
+        <div class="intro">
+            <div class="intro-img">
+                <img src="https://images.unsplash.com/photo-1581337536645-7536197ada71?q=80&w=1887&auto=format&fit=crop" alt="马克思主义">
+            </div>
+            <div class="intro-content">
+                <h3>什么是马克思主义？</h3>
+                <p>
+                    马克思主义是马克思、恩格斯在19世纪工人运动实践基础上而创立的理论体系，是关于无产阶级和人类解放的科学。它从狭义上讲是指马克思、恩格斯的观点、理论和学说的体系，
+                    具体的讲是指马克思、恩格斯关于哲学的观点、社会学理论和政治经济学说。
+                </p>
+                <p>
+                    从广义上讲，马克思主义不仅指马克思恩格斯创立的基本理论、基本观点和学说的体系，也包括继承者对它的发展，即在实践中不断发展的马克思主义。
+                    马克思主义始终站在无产阶级和人民大众的立场上，揭示了人类社会发展的客观规律，为人类社会发展指明了方向。
+                </p>
+                <p>
+                    马克思主义的诞生是人类思想史上的伟大革命，它第一次确立科学的世界观和方法论，不仅为无产阶级提供了认识世界的工具，也为改造世界提供了行动指南。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心思想板块 -->
+    <section class="core-ideas" id="core">
+        <div class="container">
+            <h2 class="section-title">核心思想</h2>
+            <div class="ideas-grid">
+                <div class="idea-card">
+                    <h4><i class="fas fa-book"></i>辩证唯物主义</h4>
+                    <p>
+                        辩证唯物主义是马克思主义的哲学基础，它认为世界的本原是物质，物质决定意识，意识对物质具有能动作用。
+                        它用联系、发展、全面的观点看问题，揭示了事物发展的根本原因在于事物内部的矛盾性。
+                    </p>
+                </div>
+                <div class="idea-card">
+                    <h4><i class="fas fa-history"></i>历史唯物主义</h4>
+                    <p>
+                        历史唯物主义揭示了人类社会发展的一般规律，认为社会存在决定社会意识，生产力决定生产关系，经济基础决定上层建筑，
+                        社会发展的根本动力是社会基本矛盾的运动，人民群众是历史的创造者。
+                    </p>
+                </div>
+                <div class="idea-card">
+                    <h4><i class="fas fa-coins"></i>剩余价值学说</h4>
+                    <p>
+                        剩余价值学说是马克思主义政治经济学的核心，它揭示了资本主义剥削的秘密，指出剩余价值是由雇佣工人创造的、
+                        被资本家无偿占有的超过劳动力价值的价值，阐明了资本主义生产方式的内在矛盾和必然趋势。
+                    </p>
+                </div>
+                <div class="idea-card">
+                    <h4><i class="fas fa-globe"></i>科学社会主义</h4>
+                    <p>
+                        科学社会主义阐明了无产阶级解放斗争的性质、条件和一般目的，指出无产阶级必须通过革命斗争推翻资本主义制度，
+                        建立无产阶级专政，最终实现共产主义，实现人的自由而全面的发展。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 发展历程 -->
+    <section class="container" id="timeline">
+        <h2 class="section-title">发展历程</h2>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h4>1848年：《共产党宣言》发表</h4>
+                    <p>《共产党宣言》的发表标志着马克思主义的正式诞生，它第一次全面系统地阐述了科学社会主义理论，指出共产主义运动将成为不可抗拒的历史潮流。</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h4>1867年：《资本论》第一卷出版</h4>
+                    <p>《资本论》是马克思主义政治经济学的经典著作，深刻分析了资本主义生产方式的内在矛盾，揭示了资本主义必然灭亡的客观规律。</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h4>1917年：十月革命胜利</h4>
+                    <p>列宁领导的俄国十月革命取得胜利，建立了世界上第一个社会主义国家，使马克思主义从理论变为现实，开创了人类历史的新纪元。</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h4>中国化马克思主义发展</h4>
+                    <p>马克思主义传入中国后，与中国具体实际相结合，先后形成了毛泽东思想、邓小平理论、“三个代表”重要思想、科学发展观、习近平新时代中国特色社会主义思想等重大理论成果。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 重要著作 -->
+    <section class="works" id="works">
+        <div class="container">
+            <h2 class="section-title">重要著作</h2>
+            <div class="works-grid">
+                <div class="work-card">
+                    <div class="work-img">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1887&auto=format&fit=crop" alt="共产党宣言">
+                    </div>
+                    <div class="work-content">
+                        <h4>《共产党宣言》</h4>
+                        <p>发表于1848年，是马克思和恩格斯为共产主义者同盟起草的纲领，是马克思主义诞生的重要标志。</p>
+                    </div>
+                </div>
+                <div class="work-card">
+                    <div class="work-img">
+                        <img src="https://images.unsplash.com/photo-1607853207859-b74f1d09f689?q=80&w=1935&auto=format&fit=crop" alt="资本论">
+                    </div>
+                    <div class="work-content">
+                        <h4>《资本论》</h4>
+                        <p>马克思的代表作，耗时40年完成，揭示了资本主义生产方式的运行规律和内在矛盾。</p>
+                    </div>
+                </div>
+                <div class="work-card">
+                    <div class="work-img">
+                        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=1887&auto=format&fit=crop" alt="德意志意识形态">
+                    </div>
+                    <div class="work-content">
+                        <h4>《德意志意识形态》</h4>
+                        <p>首次系统阐述了历史唯物主义的基本原理，标志着马克思主义哲学的成熟。</p>
+                    </div>
+                </div>
+                <div class="work-card">
+                    <div class="work-img">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?q=80&w=1887&auto=format&fit=crop" alt="反杜林论">
+                    </div>
+                    <div class="work-content">
+                        <h4>《反杜林论》</h4>
+                        <p>恩格斯的经典著作，全面阐述了马克思主义的三个组成部分，是马克思主义的百科全书。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 回到顶部按钮 -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 马克思主义主题网页 | 以科学的理论指导实践</p>
+            <p>本网页仅用于学习交流，请勿用于商业用途</p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = '#14447b';
+            } else {
+                navbar.style.backgroundColor = 'rgba(20, 68, 123, 0.95)';
+            }
+        });
+
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // 切换菜单图标
+            menuBtn.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // 点击导航链接关闭移动端菜单
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // 回到顶部按钮
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // 时间轴响应式调整（解决移动端高度问题）
+        function adjustTimeline() {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                if (window.innerWidth <= 992) {
+                    item.style.left = '0';
+                    item.style.marginBottom = '20px';
+                } else {
+                    if (index % 2 === 0) {
+                        item.style.left = '0';
+                    } else {
+                        item.style.left = '50%';
+                    }
+                    item.style.marginBottom = '0';
+                }
+            });
+        }
+
+        // 初始化和窗口调整时执行
+        window.addEventListener('load', adjustTimeline);
+        window.addEventListener('resize', adjustTimeline);
+    </script>
+</body>
+</html>
